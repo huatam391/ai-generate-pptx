@@ -1,7 +1,7 @@
 # Rikai Slide Maker
 
 ## Tổng quan
-Dự án này tự động hóa việc tạo các bài thuyết trình PowerPoint sử dụng LLM.
+Dự án này tự động hóa việc tạo các bài thuyết trình PowerPoint sử dụng LLM base trên template của Rikai Technology
 Quy trình bao gồm ba bước chính:
 1.  **Tạo cấu trúc (Structure Generation)**: Tạo cấu trúc JSON của bài thuyết trình dựa trên yêu cầu người dùng (sử dụng Gradio).
 2.  **Tạo nội dung (Content Generation)**: Tạo nội dung chi tiết cho từng slide (sử dụng LLM).
