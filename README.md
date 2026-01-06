@@ -86,6 +86,3 @@ npm install
     ```
     (Thay thế `your_api_key_here` bằng API Key bạn vừa tạo)
 
-## Hướng dẫn sử dụng
-
-### Tự động cài đặt và chạy (Khuyên dùng)
