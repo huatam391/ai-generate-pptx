@@ -24,6 +24,7 @@ Title color: #008ed4
 
 ## OUTPUT FORMAT: Return a JSON object with this structure:
 {{
+  "slide_title": "Slide title in target language",
   "elements": [
     // Array of elements, each element is one of: shape, text, table, chart, image
 
@@ -51,7 +52,7 @@ Title color: #008ed4
         "y": 0.94,        // minimum 0.65, topmost elements MUST be 0.65
         "w": 8.6,
         "h": 0.5,
-        "fontFace": "Helvetica Neue", // USE ONLY Helvetica Neue
+        "fontFace": "{font_name}", // USE ONLY {font_name}
         "fontSize": 24,  // MUST be one of: 8, 12, 18, 24
         "bold": true,      // optional
         "color": "343A40", // text color (hex without #) - USE ONLY COLORS FROM GLOBAL_STYLE
@@ -74,7 +75,7 @@ Title color: #008ed4
         "w": 8.6,
         "rowH": 0.25,      // row height
         "colW": [2.0, 2.0, 3.2],  // column widths array
-        "fontFace": "Helvetica Neue", // USE ONLY Helvetica Neue
+        "fontFace": "{font_name}", // USE ONLY {font_name}
         "fontSize": 8,  // MUST be one of: 8, 12, 18, 24
         "color": "343A40",  // USE ONLY COLORS FROM GLOBAL_STYLE
         "border": [{{ "pt": "1", "color": "DEE2E6" }}],  // USE ONLY COLORS FROM GLOBAL_STYLE
@@ -249,7 +250,7 @@ CRITICAL INSTRUCTIONS:
 
 8. **FONT SIZE USAGE** (MANDATORY):
    - ALL fontSize values MUST be one of: 8, 12, 18, or 24
-   - fontFace MUST be "Yu Mincho" for all text
+   - fontFace MUST be "{font_name}" for all text
    - This applies to:
      * Text elements (fontSize property)
      * Table elements (fontSize property)

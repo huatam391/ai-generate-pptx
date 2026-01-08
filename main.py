@@ -13,7 +13,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 llm = get_llm_instance()
-
+FONT_MAPPING = {
+    "Vietnamese": "Times New Roman",
+    "Japanese": "Yu Mincho",
+    "English": "Helvetica Neue"
+}
 def normalize_pptx_json_content(pptx_json: dict) -> dict:
     """
     Normalizes the content array in pptx_json.
@@ -47,13 +51,12 @@ async def generate_slide_elements(slide_data, language="English"):
     slide_title = slide_data.get("slide_title", "")
     slide_description = slide_data.get("slide_description", "")
 
-    prompt = PromptTemplate(template=PPTX_ELEMENT_PROMPT, input_variables=["slide_title", "slide_description", "language"])
+    prompt = PromptTemplate(template=PPTX_ELEMENT_PROMPT, input_variables=["slide_title", "slide_description", "language", "font_name"])
     chain = prompt | llm | JsonOutputParser()
-
+    font_name = FONT_MAPPING.get(language, "Helvetica Neue")
     try:
-        slide_content = await chain.ainvoke({"slide_title": slide_title, "slide_description": slide_description, "language": language})
+        slide_content = await chain.ainvoke({"slide_title": slide_title, "slide_description": slide_description, "language": language, "font_name": font_name})
         pptx_data = normalize_pptx_json_content(slide_content)
-        pptx_data["slide_title"] = slide_title
         return slide_index, pptx_data
     except Exception as e:
         logger.error(f"Error generating slide {slide_index}: {e}")
