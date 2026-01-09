@@ -84,7 +84,8 @@ async def generate_content_json(structure_path: str, output_path: str, language:
                 "height": 7.50
             }
         },
-        "slides": {}
+        "slides": {},
+        "font": None
     }
 
     try:
@@ -101,6 +102,7 @@ async def generate_content_json(structure_path: str, output_path: str, language:
         for slide_index, pptx_data in results:
             pptx_json["slides"][str(slide_index)] = pptx_data
         pptx_json["slides"]["0"] = slide_structures[0]
+        pptx_json["font"] = FONT_MAPPING.get(language, "Helvetica Neue")
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(pptx_json, f, ensure_ascii=False, indent=2)
 

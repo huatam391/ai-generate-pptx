@@ -133,6 +133,7 @@ interface PPTXConfig {
     background?: {
         path: string;
     };
+    font: string
 }
 
 const ShapeType = {
@@ -351,12 +352,14 @@ export class PPTXGenerator {
     private slideTitles: string[];
     private pres: PptxGenJS;
     private ShapeType: typeof ShapeType;
+    private font: string;
 
     constructor(config: PPTXConfig, slideTitles: string[] = []) {
         this.config = config;
         this.slideTitles = slideTitles;
         this.pres = new PptxGenJS();
         this.ShapeType = ShapeType;
+        this.font = config.font || "Helvetica Neue";
         this.setupPresentation();
     }
 
@@ -426,7 +429,7 @@ export class PPTXGenerator {
                     bold: true,
                     color: '008ed4',
                     align: 'left',
-                    fontFace: 'Helvetica Neue'
+                    fontFace: this.font
                 });
     }
 
@@ -449,7 +452,7 @@ export class PPTXGenerator {
                     bold: true,
                     color: '008ed4',
                     align: 'left',
-                    fontFace: 'Helvetica Neue'
+                    fontFace: this.font
                 });
             }
 
@@ -549,7 +552,7 @@ export class PPTXGenerator {
             return;
         }
 
-        element.props.fontFace = 'Helvetica Neue';
+        element.props.fontFace = this.font;
         element.props.lineSpacingMultiple = 1;
         element.props.wrap = true;
         element.props.valign = "middle";
@@ -562,7 +565,7 @@ export class PPTXGenerator {
     }
 
     private addText(slide: any, element: SlideElement): void {
-        element.props.fontFace = 'Helvetica Neue';
+        element.props.fontFace = this.font;
         element.props.lineSpacingMultiple = 1;
         element.props.valign = element.props.valign || "middle";
         element.props.fit = "shrink";
@@ -650,7 +653,7 @@ export class PPTXGenerator {
                 item.options.fontSize = Math.round(Math.max(minFontSize, targetFontSize));
 
                 if (!item.options.fontFace) {
-                    item.options.fontFace = element.props.fontFace;
+                    item.options.fontFace = this.font;
                 }
 
                 return item;
@@ -702,7 +705,7 @@ export class PPTXGenerator {
         }
 
         try {
-            element.props.fontFace ='Helvetica Neue';
+            element.props.fontFace =this.font;
             element.props.autoPage = true;
             element.props.newSlideStartY = 0.65;
             element.props.autoPageRepeatHeader = true;
